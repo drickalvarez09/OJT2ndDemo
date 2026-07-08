@@ -1,0 +1,129 @@
+<!-- Summary Cards -->
+<div class="summary-cards grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+    <!-- Total Activities -->
+    <div class="summary-card bg-white rounded-lg shadow-xs p-4 hover:shadow-md transition-shadow duration-200">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-sm font-medium text-gray-700 mb-1">Activities Found</p>
+                <h3 class="text-2xl font-bold text-blue-600" id="activitiesCount">0</h3>
+                <p class="text-xs text-gray-500 mt-1">
+                    <i class="fas fa-list-alt mr-1"></i>
+                    Matching current filters
+                </p>
+            </div>
+            <div class="bg-blue-50 p-3 rounded-full">
+                <i class="fas fa-list-alt text-blue-600 text-lg"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Budget -->
+    <div class="summary-card bg-white rounded-lg shadow-xs p-4 hover:shadow-md transition-shadow duration-200">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-sm font-medium text-gray-700 mb-1">Total Budget</p>
+                <h3 class="text-2xl font-bold text-green-600" id="filteredBudget">₱0</h3>
+                <p class="text-xs text-gray-500 mt-1">
+                    <i class="fas fa-money-bill-wave mr-1"></i>
+                    Allocation for filtered items
+                </p>
+            </div>
+            <div class="bg-green-50 p-3 rounded-full">
+                <i class="fas fa-money-bill-wave text-green-600 text-lg"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Budget Utilization -->
+    <div class="summary-card bg-white rounded-lg shadow-xs p-4 hover:shadow-md transition-shadow duration-200">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-sm font-medium text-gray-700 mb-1">Utilization Rate</p>
+                <h3 class="text-2xl font-bold text-amber-600" id="filteredBUR">0%</h3>
+                <p class="text-xs text-gray-500 mt-1">
+                    <i class="fas fa-chart-pie mr-1"></i>
+                    <span id="filteredObligation">₱0 obligated</span>
+                </p>
+            </div>
+            <div class="bg-amber-50 p-3 rounded-full">
+                <i class="fas fa-chart-pie text-amber-600 text-lg"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Programs Count -->
+    <div class="summary-card bg-white rounded-lg shadow-xs p-4 hover:shadow-md transition-shadow duration-200">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-sm font-medium text-gray-700 mb-1">Programs</p>
+                <h3 class="text-2xl font-bold text-purple-600" id="programsCount">0</h3>
+                <p class="text-xs text-gray-500 mt-1">
+                    <i class="fas fa-project-diagram mr-1"></i>
+                    Unique programs in view
+                </p>
+            </div>
+            <div class="bg-purple-50 p-3 rounded-full">
+                <i class="fas fa-project-diagram text-purple-600 text-lg"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Charts Grid -->
+<div class="chart-grid-2x2 grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Top Left: Vertical Bar Chart - Budget by Program -->
+    <div class="chart-container bg-white p-4 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-200">
+        <div class="flex items-center mb-4">
+            <i class="fas fa-chart-column w-5 h-5 text-blue-600 mr-2"></i>
+            <h3 class="text-lg font-semibold text-gray-800">Budget by Component Program</h3>
+        </div>
+        <div class="chart-content h-72">
+            <canvas id="programBudgetChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Top Right: Pie Chart - Activities by Province -->
+    <div class="chart-container bg-white p-4 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-200">
+        <div class="flex items-center mb-4">
+            <i class="fas fa-chart-pie w-5 h-5 text-purple-600 mr-2"></i>
+            <h3 class="text-lg font-semibold text-gray-800">Activities by Province</h3>
+        </div>
+        <div class="chart-content h-72">
+            <canvas id="provincesPieChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Bottom Left: Pie Chart - Industry Distribution -->
+    <div class="chart-container bg-white p-4 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-200">
+        <div class="flex items-center mb-4">
+            <i class="fas fa-industry w-5 h-5 text-green-600 mr-2"></i>
+            <h3 class="text-lg font-semibold text-gray-800">Industry Distribution</h3>
+        </div>
+        <div class="chart-content h-72">
+            <canvas id="industryChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Bottom Right: Horizontal Bar Chart - Activities by Modality -->
+    <div class="chart-container bg-white p-4 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-200">
+        <div class="flex items-center mb-4">
+            <i class="fas fa-bars-progress w-5 h-5 text-orange-600 mr-2"></i>
+            <h3 class="text-lg font-semibold text-gray-800">Activities by Program</h3>
+        </div>
+        <div class="chart-content h-72">
+            <canvas id="modalityChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<!-- Call-to-action for detailed view -->
+<div class="bg-white rounded-lg border border-gray-200 shadow-xs p-4 mt-8">
+    <div class="flex justify-between items-center mb-2">
+        <h2 class="text-lg font-semibold text-gray-800">Need Detailed Results?</h2>
+        <button id="switchToSheets" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-primary-600">
+            <i class="fas fa-table w-4 h-4 mr-1"></i>
+            View Table
+        </button>
+    </div>
+    <p class="text-gray-800 text-sm">Switch to the Sheets view for detailed search results, sortable columns, and advanced filtering options.</p>
+</div>

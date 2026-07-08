@@ -1,0 +1,609 @@
+/* index.css - Enhanced for proper filter positioning and chart auto-resizing */
+
+/* ===== BASE STYLES ===== */
+* {
+  box-sizing: border-box;
+  -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape */
+}
+
+html {
+  font-size: 16px;
+  zoom: normal !important;
+}
+
+body {
+  overflow-x: hidden;
+  min-height: 100vh;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* ===== MAIN LAYOUT FIXES ===== */
+.container {
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+/* ===== FILTER SIDEBAR INSIDE CONTENT ===== */
+#desktopFilters {
+  position: relative;
+  flex: 0 0 320px;
+  max-width: 320px;
+  min-width: 320px;
+  height: calc(100vh - 8rem);
+  overflow-y: auto;
+  overflow-x: hidden;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  background-color: #f9fafb;
+  z-index: 30;
+}
+
+/* Replace with: */
+#desktopFilters {
+  position: sticky;
+  top: 7rem; /* Adjust based on your header height */
+  align-self: flex-start;
+}
+
+#desktopFilters > div {
+  max-height: calc(100vh - 9rem);
+  overflow-y: auto;
+}
+
+/* ===== CHART AUTO-RESIZE STYLES ===== */
+/* Chart Container - Equal height for all charts */
+.chart-container {
+    position: relative;
+    width: 100%;
+    height: 400px; /* Fixed equal height */
+    min-height: 400px;
+    max-height: 400px;
+    overflow: hidden !important;
+}
+
+/* Remove special taller container */
+.chart-container:first-child {
+    height: 400px; /* Same as others */
+    min-height: 400px;
+    max-height: 400px;
+}
+
+/* Chart content should fill container */
+.chart-content {
+    position: absolute;
+    width: 100% !important;
+    height: 100% !important;
+    top: 0;
+    left: 0;
+}
+
+/* Responsive adjustments */
+@media (min-width: 1024px) {
+    .chart-container {
+        height: 450px;
+        min-height: 450px;
+        max-height: 450px;
+    }
+    
+    .chart-container:first-child {
+        height: 450px;
+        min-height: 450px;
+        max-height: 450px;
+    }
+}
+
+/* Tablet */
+@media (max-width: 1023px) and (min-width: 768px) {
+    .chart-container {
+        height: 380px;
+        min-height: 380px;
+        max-height: 380px;
+    }
+    
+    .chart-container:first-child {
+        height: 380px;
+        min-height: 380px;
+        max-height: 380px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+    .chart-container {
+        height: 350px;
+        min-height: 350px;
+        max-height: 350px;
+    }
+    
+    .chart-container:first-child {
+        height: 350px;
+        min-height: 350px;
+        max-height: 350px;
+    }
+}
+
+/* Chart grid layout */
+.chart-grid-2x2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    width: 100%;
+    align-items: stretch; /* Make all charts stretch equally */
+}
+
+@media (min-width: 1024px) {
+    .chart-grid-2x2 {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+}
+
+/* ===== TABLE STYLES - FIXED ===== */
+.sheets-container {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 0.5rem;
+    border: 1px solid #e5e7eb;
+    background: white;
+    display: block !important; /* Force display */
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Remove any hidden classes from sheets containers */
+.sheets-container:not(.hidden) {
+    display: block !important;
+}
+
+.table-fixed {
+    width: 100%;
+    table-layout: fixed; /* Use fixed layout for consistent columns */
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table-fixed th {
+    white-space: nowrap;
+    padding: 0.75rem 1rem;
+    background-color: #f9fafb;
+    font-weight: 600;
+    color: #162556;
+    border-bottom: 2px solid #e5e7eb;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.table-fixed td {
+    padding: 0.75rem 1rem;
+    vertical-align: top;
+    border-bottom: 1px solid #e5e7eb;
+    background-color: white !important; /* Ensure white background */
+    color: #374151 !important; /* Ensure text color */
+}
+
+
+/* Multi-line text for industry and province columns */
+#activitiesTableContainer .table-fixed td:nth-child(3), /* Industry */
+#activitiesTableContainer .table-fixed td:nth-child(4) { /* Province */
+    white-space: normal !important;
+    word-break: break-word !important;
+    min-width: 120px;
+    max-width: 180px;
+    line-height: 1.4;
+}
+
+/* Ensure table rows are visible */
+.table-fixed tbody tr {
+    background-color: white !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.table-fixed tbody tr:hover {
+    background-color: #f9fafb !important;
+}
+
+/* Fix for empty state */
+.table-fixed td[colspan] {
+    text-align: center;
+    padding: 3rem 1rem !important;
+}
+
+/* Remove any hiding transitions */
+.sheets-container,
+.table-fixed,
+.table-fixed * {
+    transition: none !important;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+/* Large screens */
+@media (min-width: 1024px) {
+  .chart-grid-2x2 {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  
+  .chart-container {
+    height: 450px;
+  }
+  
+  .chart-container:first-child {
+    height: 550px; /* Even taller on desktop */
+  }
+}
+
+/* Tablet */
+@media (max-width: 1023px) and (min-width: 768px) {
+  #desktopFilters {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
+  }
+  
+  .sticky-sidebar {
+    position: static;
+    height: auto;
+  }
+  
+  .chart-container {
+    height: 380px;
+  }
+  
+  .chart-container:first-child {
+    height: 450px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  #desktopFilters {
+    display: none;
+  }
+  
+  .chart-container {
+    height: 350px;
+    min-height: 300px;
+  }
+  
+  .chart-container:first-child {
+    height: 400px;
+    min-height: 350px;
+  }
+  
+  .chart-grid-2x2 {
+    gap: 1rem;
+  }
+}
+
+/* ===== ZOOM HANDLING - IMPROVED ===== */
+/* Prevent layout break on zoom */
+@media screen and (min-resolution: 120dpi) {
+  .chart-content canvas {
+    width: 100% !important;
+    height: 100% !important;
+    transform: none !important;
+  }
+  
+  /* Force chart container reflow */
+  .chart-container {
+    min-height: 350px;
+    height: auto !important;
+  }
+  
+  .chart-grid-2x2 {
+    gap: 1rem;
+  }
+}
+
+/* Add to prevent zoom breaking */
+.chart-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden !important;
+  min-height: 300px;
+}
+
+.chart-container:first-child {
+  min-height: 450px;
+  height: auto !important;
+}
+
+/* Force proportional resizing */
+@media (min-width: 1024px) {
+  .chart-container:first-child {
+    min-height: 550px;
+    height: auto !important;
+  }
+}
+
+/* ===== SCROLLBAR STYLING ===== */
+/* Custom scrollbar for sidebar */
+#desktopFilters::-webkit-scrollbar {
+  width: 6px;
+}
+
+#desktopFilters::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+#desktopFilters::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+#desktopFilters::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+/* ===== UTILITY CLASSES ===== */
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .summary-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .summary-cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Modality badges */
+.modality-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.modality-online {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.modality-f2f {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.modality-hybrid {
+  background-color: #f3e8ff;
+  color: #5b21b6;
+}
+
+.modality-unknown {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+/* Loading states */
+.summary-card.updating {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Print styles */
+@media print {
+  #desktopFilters {
+    display: none;
+  }
+  
+  .chart-container {
+    page-break-inside: avoid;
+    height: 300px;
+  }
+}
+
+/* ===== ANIMATIONS ===== */
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+/* Smooth filter visibility transitions */
+.mb-4 {
+  transition: opacity 0.3s ease, max-height 0.3s ease, margin 0.3s ease;
+}
+
+/* ===== CRITICAL FIX: TABLE VISIBILITY ===== */
+/* Remove any inherited opacity or visibility issues */
+.sheets-container .table-fixed tbody tr {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: table-row !important;
+}
+
+/* Ensure table cells are visible */
+.sheets-container .table-fixed td {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: table-cell !important;
+    color: #374151 !important;
+    background-color: white !important;
+}
+
+/* Override any parent opacity settings */
+.sheets-container,
+.sheets-container * {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Fix for table body being hidden */
+.sheets-container tbody {
+    display: table-row-group !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Ensure tables are properly displayed when not hidden */
+#activitiesTableContainer:not(.hidden),
+#perUacsTableContainer:not(.hidden),
+#fundsTableContainer:not(.hidden) {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Remove any transitions that might interfere */
+.sheets-container,
+.sheets-container table,
+.sheets-container tbody,
+.sheets-container tr,
+.sheets-container td {
+    transition: none !important;
+    animation: none !important;
+}
+
+/* ENSURE TABLE VISIBILITY */
+.sheets-container {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.sheets-container.hidden {
+    display: none !important;
+}
+
+/* Make sure table contents are visible */
+.sheets-container table {
+    width: 100% !important;
+    display: table !important;
+}
+
+.sheets-container tbody,
+.sheets-container tr,
+.sheets-container td,
+.sheets-container th {
+    display: table-cell !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    color: inherit !important;
+    background-color: inherit !important;
+}
+
+/* Remove any transitions that might hide content */
+.sheets-container * {
+    transition: none !important;
+    animation: none !important;
+}
+
+/* Force table body to be visible */
+.sheets-container tbody {
+    display: table-row-group !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Ensure table cells have proper styling */
+.sheets-container td {
+    padding: 12px 16px !important;
+    border-bottom: 1px solid #e5e7eb !important;
+    color: #374151 !important;
+    background-color: white !important;
+    vertical-align: top !important;
+}
+
+/* In index.css, add these styles: */
+
+/* Table Improvements */
+.table-fixed {
+    table-layout: auto; /* Changed from fixed to auto for better responsiveness */
+    width: 100%;
+}
+
+/* Ensure table cells can wrap text properly */
+.table-fixed td {
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    max-width: 200px; /* Limit maximum width */
+    min-width: 100px; /* Ensure minimum width */
+    overflow-wrap: break-word !important;
+}
+
+/* Specific column width adjustments for better alignment */
+#activitiesTableContainer .table-fixed th:nth-child(1), /* Activity */
+#activitiesTableContainer .table-fixed td:nth-child(1) {
+    min-width: 200px;
+    max-width: 250px;
+}
+
+#activitiesTableContainer .table-fixed th:nth-child(2), /* Component Program */
+#activitiesTableContainer .table-fixed td:nth-child(2) {
+    min-width: 120px;
+    max-width: 180px;
+}
+
+#activitiesTableContainer .table-fixed th:nth-child(3), /* Industry */
+#activitiesTableContainer .table-fixed td:nth-child(3) {
+    min-width: 100px;
+    max-width: 150px;
+}
+
+#activitiesTableContainer .table-fixed th:nth-child(4), /* Province */
+#activitiesTableContainer .table-fixed td:nth-child(4) {
+    min-width: 90px;
+    max-width: 120px;
+}
+
+#activitiesTableContainer .table-fixed th:nth-child(5), /* Modality */
+#activitiesTableContainer .table-fixed td:nth-child(5) {
+    min-width: 80px;
+    max-width: 100px;
+}
+
+#activitiesTableContainer .table-fixed th:nth-child(8), /* Remarks */
+#activitiesTableContainer .table-fixed td:nth-child(8) {
+    min-width: 150px;
+    max-width: 300px;
+}
+
+/* For Per UACS and Funds tables */
+#perUacsTableContainer .table-fixed td,
+#fundsTableContainer .table-fixed td {
+    min-width: 80px;
+    max-width: 200px;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+}
+
+/* Make sure table headers align with columns */
+.table-fixed th {
+    vertical-align: top;
+    border-bottom: 2px solid #e5e7eb;
+    background-color: #f9fafb;
+}
+
+/* Ensure table body is properly aligned */
+.table-fixed tbody tr {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+/* Improve table responsiveness */
+@media (max-width: 768px) {
+    .table-fixed {
+        font-size: 0.875rem;
+    }
+    
+    .table-fixed th,
+    .table-fixed td {
+        padding: 0.5rem !important;
+    }
+}

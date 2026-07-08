@@ -1,0 +1,178 @@
+<!-- Summary Cards (Updated IDs to match charts.html) -->
+<div class="summary-cards grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+    <!-- Total Activities -->
+    <div class="summary-card bg-white rounded-lg shadow-xs p-4 hover:shadow-md transition-shadow duration-200">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-sm font-medium text-gray-700 mb-1">Activities Found</p>
+                <h3 class="text-2xl font-bold text-blue-600" id="activitiesCount">0</h3>
+                <p class="text-xs text-gray-500 mt-1">
+                    <i class="fas fa-list-alt mr-1"></i>
+                    Matching current filters
+                </p>
+            </div>
+            <div class="bg-blue-50 p-3 rounded-full">
+                <i class="fas fa-list-alt text-blue-600 text-lg"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Budget -->
+    <div class="summary-card bg-white rounded-lg shadow-xs p-4 hover:shadow-md transition-shadow duration-200">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-sm font-medium text-gray-700 mb-1">Total Budget</p>
+                <h3 class="text-2xl font-bold text-green-600" id="filteredBudget">₱0</h3>
+                <p class="text-xs text-gray-500 mt-1">
+                    <i class="fas fa-money-bill-wave mr-1"></i>
+                    Allocation for filtered items
+                </p>
+            </div>
+            <div class="bg-green-50 p-3 rounded-full">
+                <i class="fas fa-money-bill-wave text-green-600 text-lg"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Budget Utilization -->
+    <div class="summary-card bg-white rounded-lg shadow-xs p-4 hover:shadow-md transition-shadow duration-200">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-sm font-medium text-gray-700 mb-1">Utilization Rate</p>
+                <h3 class="text-2xl font-bold text-amber-600" id="filteredBUR">0%</h3>
+                <p class="text-xs text-gray-500 mt-1">
+                    <i class="fas fa-chart-pie mr-1"></i>
+                    <span id="filteredObligation">₱0 obligated</span>
+                </p>
+            </div>
+            <div class="bg-amber-50 p-3 rounded-full">
+                <i class="fas fa-chart-pie text-amber-600 text-lg"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Programs Count -->
+    <div class="summary-card bg-white rounded-lg shadow-xs p-4 hover:shadow-md transition-shadow duration-200">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-sm font-medium text-gray-700 mb-1">Programs</p>
+                <h3 class="text-2xl font-bold text-purple-600" id="programsCount">0</h3>
+                <p class="text-xs text-gray-500 mt-1">
+                    <i class="fas fa-project-diagram mr-1"></i>
+                    Unique programs in view
+                </p>
+            </div>
+            <div class="bg-purple-50 p-3 rounded-full">
+                <i class="fas fa-project-diagram text-purple-600 text-lg"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Data Source Toggle Buttons (Updated Design) -->
+<div class="border-b border-gray-200 mb-6 overflow-x-auto">
+    <div class="flex min-w-max">
+        <button id="activitiesViewBtn" class="data-source-btn px-3 sm:px-4 py-2 border-b-2 font-medium flex items-center whitespace-nowrap border-blue-500 text-blue-600">
+            <i class="fas fa-list-alt w-4 h-4 mr-1.5 sm:mr-2"></i>
+            Activities
+        </button>
+        <button id="perUacsViewBtn" class="data-source-btn px-3 sm:px-4 py-2 border-b-2 font-medium flex items-center whitespace-nowrap text-gray-800 hover:text-blue-600 border-transparent">
+            <i class="fas fa-file-invoice-dollar w-4 h-4 mr-1.5 sm:mr-2"></i>
+            Per UACS
+        </button>
+        <button id="fundsViewBtn" class="data-source-btn px-3 sm:px-4 py-2 border-b-2 font-medium flex items-center whitespace-nowrap text-gray-800 hover:text-blue-600 border-transparent">
+            <i class="fas fa-money-bill-wave w-4 h-4 mr-1.5 sm:mr-2"></i>
+            Funds
+        </button>
+    </div>
+</div>
+<!-- Activities Table -->
+<div id="activitiesTableContainer" class="sheets-container">
+    <div class="overflow-x-auto bg-white rounded-lg border border-gray-200 shadow-sm">
+        <table class="min-w-full table-fixed divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Activity / Event</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Component Program</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Industry</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Province</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Modality</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Start Date</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">End Date</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Remarks/Details</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200" id="activitiesTableBody">
+                <!-- Data will be populated dynamically -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Per UACS Table -->
+<div id="perUacsTableContainer" class="sheets-container hidden">
+    <div class="overflow-x-auto bg-white rounded-lg border border-gray-200 shadow-sm">
+        <table class="min-w-full table-fixed divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Component Program</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Fund Source</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Specific Activity</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Sub-ARO No.</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Total Allocation</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Obligation</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">BUR</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Unobligated Balance</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200" id="perUacsTableBody">
+                <!-- Data will be populated dynamically -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Funds Table -->
+<div id="fundsTableContainer" class="sheets-container hidden">
+    <div class="overflow-x-auto bg-white rounded-lg border border-gray-200 shadow-sm">
+        <table class="min-w-full table-fixed divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Component Program</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Fund Source</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Specific Activity</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Sub-ARO No.</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Total Allocation</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Obligation</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">BUR</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Unobligated Balance</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200" id="fundsTableBody">
+                <!-- Data will be populated dynamically -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Pagination (BetterGov-style) -->
+<div class="mt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+    <div class="text-sm text-gray-500" id="paginationInfo">
+        Showing <span class="font-medium text-gray-700">0</span> of <span class="font-medium text-gray-700">0</span> activities
+    </div>
+    <div class="flex items-center space-x-2">
+        <button id="prevPage" class="inline-flex items-center justify-center px-3 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 rounded-md hover:bg-gray-50 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-primary-600 disabled:opacity-50 disabled:cursor-not-allowed shadow-xs" disabled>
+            <i class="fas fa-chevron-left mr-1"></i>
+            Previous
+        </button>
+        <div class="flex items-center space-x-1">
+            <span class="text-sm text-gray-700">Page</span>
+            <input type="number" id="pageInput" class="w-12 text-center border border-gray-300 rounded-md px-2 py-1 text-sm focus:ring-2 focus:ring-primary-600 focus:border-primary-600" min="1" value="1">
+            <span class="text-sm text-gray-700">of <span id="totalPages">1</span></span>
+        </div>
+        <button id="nextPage" class="inline-flex items-center justify-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-primary-700 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-primary-600 disabled:opacity-50 disabled:cursor-not-allowed shadow-xs" disabled>
+            Next
+            <i class="fas fa-chevron-right ml-1"></i>
+        </button>
+    </div>
+</div>
