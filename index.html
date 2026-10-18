@@ -5,85 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
     <meta name="description" content="ICT Industry Development Dashboard - DICT" />
     <title>DICT - ICT Industry Development Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com" defer></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0" defer></script>
     <script>
-        if (typeof Chart !== 'undefined' && typeof ChartDataLabels !== 'undefined') {
-            Chart.register(ChartDataLabels);
-        }
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof Chart !== 'undefined' && typeof ChartDataLabels !== 'undefined') {
+                Chart.register(ChartDataLabels);
+            }
+        });
     </script>
     <link href="index.css" rel="stylesheet"/>
-    <style>
-        /* Custom colors matching BetterGov theme */
-        :root {
-            --primary-50: #eff6ff;
-            --primary-100: #dbeafe;
-            --primary-600: #0052BC;
-            --primary-700: #0041a3;
-            --gray-50: #f9fafb;
-            --gray-100: #f3f4f6;
-            --gray-200: #e5e7eb;
-            --gray-700: #374151;
-            --gray-800: #1f2937;
-            --accent-500: #60a5fa;
-        }
-        
-        /* Custom styles for better layout */
-        .sticky-sidebar {
-            position: sticky;
-            top: 7.5rem;
-            height: calc(100vh - 8rem);
-            overflow-y: auto;
-        }
-        
-        /* Hide scrollbar but keep functionality */
-        .sticky-sidebar::-webkit-scrollbar {
-            width: 4px;
-        }
-        
-        .sticky-sidebar::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        
-        .sticky-sidebar::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 2px;
-        }
-        
-        /* Smooth transitions */
-        .transition-all {
-            transition-property: all;
-            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-            transition-duration: 300ms;
-        }
-        
-        /* Better zoom handling */
-        @media screen and (min-resolution: 120dpi) {
-            body {
-                zoom: 0.95;
-            }
-        }
-        
-        /* Fix filter container */
-        .filter-container {
-            min-height: 500px;
-        }
-    </style>
 </head>
 
 <body class="bg-gray-50 min-h-screen flex flex-col">
     <!-- Top Navigation Bar -->
     <nav class="bg-white shadow-xs sticky top-0 z-50">
         <div class="container mx-auto px-4">
-            <!-- Logo and Main Navigation -->
             <div class="px-4">
                 <div class="flex justify-between items-center py-4">
                     <div class="flex items-center">
                         <a href="#" class="flex items-center">
                             <div class="bg-[#0052BC] text-white p-2 rounded mr-3">
-                                <i class="fas fa-laptop-code text-xl"></i>
+                                <i class="fas fa-laptop-code text-xl" aria-hidden="true"></i>
                             </div>
                             <div>
                                 <div class="text-black font-bold">DICT - ICT Industry Development</div>
@@ -91,31 +36,31 @@
                             </div>
                         </a>
                     </div>
-                    
+
                     <!-- Desktop Navigation -->
                     <div class="hidden lg:flex items-center space-x-6">
                         <div class="relative group">
                             <a class="flex items-center font-medium transition-colors pb-1 border-b-2 whitespace-nowrap text-gray-700 hover:text-primary-600 border-transparent" href="#">
                                 About
-                                <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                                <i class="fas fa-chevron-down ml-1 text-xs" aria-hidden="true"></i>
                             </a>
                         </div>
                         <div class="relative group">
                             <a class="flex items-center font-medium transition-colors pb-1 border-b-2 whitespace-nowrap text-gray-700 hover:text-primary-600 border-transparent" href="#">
                                 Programs
-                                <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                                <i class="fas fa-chevron-down ml-1 text-xs" aria-hidden="true"></i>
                             </a>
                         </div>
                         <div class="relative group">
                             <a class="flex items-center font-medium transition-colors pb-1 border-b-2 whitespace-nowrap text-gray-700 hover:text-primary-600 border-transparent" href="#">
                                 Services
-                                <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                                <i class="fas fa-chevron-down ml-1 text-xs" aria-hidden="true"></i>
                             </a>
                         </div>
                         <div class="relative group">
                             <a class="flex items-center font-medium transition-colors pb-1 border-b-2 whitespace-nowrap text-gray-700 hover:text-primary-600 border-transparent" href="#">
                                 Directory
-                                <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                                <i class="fas fa-chevron-down ml-1 text-xs" aria-hidden="true"></i>
                             </a>
                         </div>
                         <a href="https://iidb3-fund.intranex.cloud" class="flex items-center font-medium transition-colors text-gray-700 hover:text-primary-600">
@@ -124,19 +69,19 @@
                         <div class="relative group">
                             <a class="flex items-center font-medium transition-colors pb-1 border-b-2 whitespace-nowrap text-gray-700 hover:text-primary-600 border-transparent" href="#">
                                 Activities
-                                <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                                <i class="fas fa-chevron-down ml-1 text-xs" aria-hidden="true"></i>
                             </a>
                         </div>
                         <a class="flex items-center text-gray-700 hover:text-primary-600 font-medium transition-colors" href="#">
-                            <i class="fas fa-search h-4 w-4 mr-1"></i>
+                            <i class="fas fa-search h-4 w-4 mr-1" aria-hidden="true"></i>
                             Search
                         </a>
                     </div>
-                    
+
                     <!-- Mobile Menu Button -->
                     <div class="lg:hidden flex items-center">
-                        <button id="mobileMenuToggle" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-primary-600 hover:bg-gray-100 focus:outline-hidden focus:ring-2 focus:ring-inset focus:ring-primary-600">
-                            <i class="fas fa-bars block h-6 w-6"></i>
+                        <button id="mobileMenuToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenuOverlay" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-primary-600 hover:bg-gray-100 focus:outline-hidden focus:ring-2 focus:ring-inset focus:ring-primary-600">
+                            <i class="fas fa-bars block h-6 w-6" aria-hidden="true"></i>
                         </button>
                     </div>
                 </div>
@@ -153,7 +98,7 @@
                         <div class="flex items-center transition-all duration-200 opacity-100 translate-y-0">
                             <div class="inline-flex items-center space-x-1">
                                 <span class="text-accent-200">
-                                    <i class="fas fa-database mr-1"></i>
+                                    <i class="fas fa-database mr-1" aria-hidden="true"></i>
                                 </span>
                                 <span class="text-xs font-medium">Dashboard:</span>
                                 <span class="text-xs text-accent-100" id="currentViewInfo">ICT Industry Activities</span>
@@ -175,70 +120,70 @@
         </div>
     </div>
 
-    <!-- Main Content Area - UPDATED LAYOUT -->
+    <!-- Main Content Area -->
     <div class="flex-1">
         <div class="container mx-auto px-4 py-8">
             <div class="lg:hidden mb-4">
-            <button id="mobileFilterToggle" class="inline-flex items-center justify-center px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700">
-                <i class="fas fa-filter mr-2"></i>Filters
-            </button>
-        </div>
+                <button id="mobileFilterToggle" type="button" aria-label="Open filters" aria-expanded="false" aria-controls="mobileFilterOverlay" class="inline-flex items-center justify-center px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700">
+                    <i class="fas fa-filter mr-2" aria-hidden="true"></i>Filters<span id="mobileFilterCount" class="ml-1"></span>
+                </button>
+            </div>
             <div class="flex flex-col lg:flex-row gap-8">
-                <!-- Sidebar Filters - INSIDE CONTENT CONTAINER -->
+                <!-- Sidebar Filters -->
                 <div id="desktopFilters" class="hidden lg:block w-80 shrink-0">
-                <div class="bg-gray-50 border border-gray-200 rounded-lg p-6 sticky top-24">    
+                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-6 sticky top-24">
                         <div class="flex items-center justify-between mb-4">
                             <div class="flex items-center">
-                                <i class="fas fa-filter w-5 h-5 text-primary-600 mr-2"></i>
+                                <i class="fas fa-filter w-5 h-5 text-primary-600 mr-2" aria-hidden="true"></i>
                                 <h2 class="text-lg font-semibold text-gray-800">Filters</h2>
                             </div>
                             <div class="bg-primary-50 px-2 py-1 rounded text-xs font-medium text-primary-600" id="filterCount">
                                 0 Active
                             </div>
                         </div>
-                        
+
                         <div class="space-y-4">
                             <div class="mb-4">
-                                <label class="block text-sm font-medium text-[#162556] mb-2">Search Activities</label>
+                                <label class="block text-sm font-medium text-[#162556] mb-2" for="searchActivitiesDesktop">Search Activities</label>
                                 <div class="relative">
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <i class="fas fa-search h-4 w-4 text-gray-400"></i>
+                                        <i class="fas fa-search h-4 w-4 text-gray-400" aria-hidden="true"></i>
                                     </div>
-                                    <input type="text" class="filter-input block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-hidden focus:ring-primary-600 focus:border-primary-600 sm:text-sm" placeholder="Activity name, details...">
+                                    <input id="searchActivitiesDesktop" data-filter="search" type="text" class="filter-input block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-hidden focus:ring-primary-600 focus:border-primary-600 sm:text-sm" placeholder="Activity name, details...">
                                 </div>
                             </div>
 
                             <div class="mb-4">
-                                <label class="block text-sm font-medium text-[#162556] mb-2">Component Program</label>
-                                <select class="filter-select w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-sm text-gray-700 hover:border-primary-600 focus:outline-hidden focus:ring-1 focus:ring-primary-600 focus:border-primary-600">
+                                <label class="block text-sm font-medium text-[#162556] mb-2" for="programFilterDesktop">Component Program</label>
+                                <select id="programFilterDesktop" data-filter="program" class="filter-select w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-sm text-gray-700 hover:border-primary-600 focus:outline-hidden focus:ring-1 focus:ring-primary-600 focus:border-primary-600">
                                     <option value="">All Programs</option>
                                 </select>
                             </div>
 
                             <div class="mb-4">
-                                <label class="block text-sm font-medium text-[#162556] mb-2">Industry Supported</label>
-                                <select class="filter-select w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-sm text-gray-700 hover:border-primary-600 focus:outline-hidden focus:ring-1 focus:ring-primary-600 focus:border-primary-600">
+                                <label class="block text-sm font-medium text-[#162556] mb-2" for="industryFilterDesktop">Industry Supported</label>
+                                <select id="industryFilterDesktop" data-filter="industry" class="filter-select w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-sm text-gray-700 hover:border-primary-600 focus:outline-hidden focus:ring-1 focus:ring-primary-600 focus:border-primary-600">
                                     <option value="">All Industries</option>
                                 </select>
                             </div>
 
                             <div class="mb-4">
-                                <label class="block text-sm font-medium text-[#162556] mb-2">Province</label>
-                                <select class="filter-select w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-sm text-gray-700 hover:border-primary-600 focus:outline-hidden focus:ring-1 focus:ring-primary-600 focus:border-primary-600">
+                                <label class="block text-sm font-medium text-[#162556] mb-2" for="provinceFilterDesktop">Province</label>
+                                <select id="provinceFilterDesktop" data-filter="province" class="filter-select w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-sm text-gray-700 hover:border-primary-600 focus:outline-hidden focus:ring-1 focus:ring-primary-600 focus:border-primary-600">
                                     <option value="">All Provinces</option>
                                 </select>
                             </div>
 
                             <div class="mb-4">
-                                <label class="block text-sm font-medium text-[#162556] mb-2">Modality</label>
-                                <select class="filter-select w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-sm text-gray-700 hover:border-primary-600 focus:outline-hidden focus:ring-1 focus:ring-primary-600 focus:border-primary-600">
+                                <label class="block text-sm font-medium text-[#162556] mb-2" for="modalityFilterDesktop">Modality</label>
+                                <select id="modalityFilterDesktop" data-filter="modality" class="filter-select w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-sm text-gray-700 hover:border-primary-600 focus:outline-hidden focus:ring-1 focus:ring-primary-600 focus:border-primary-600">
                                     <option value="">All Modalities</option>
                                 </select>
                             </div>
                         </div>
 
-                        <button class="clear-filters mt-6 w-full bg-gray-100 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-200 transition-colors font-medium border border-gray-300 text-sm focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-primary-600">
-                            <i class="fas fa-times mr-2"></i>Clear All Filters
+                        <button type="button" class="clear-filters mt-6 w-full bg-gray-100 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-200 transition-colors font-medium border border-gray-300 text-sm focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-primary-600">
+                            <i class="fas fa-times mr-2" aria-hidden="true"></i>Clear All Filters
                         </button>
                     </div>
                 </div>
@@ -249,20 +194,20 @@
                         <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
                             <h1 class="text-2xl font-bold text-gray-900">ICT Industry Development Dashboard</h1>
                             <div class="flex space-x-2">
-                                <button id="chartsViewBtn" class="view-toggle inline-flex items-center justify-center rounded-md font-medium transition-colors focus:outline-hidden focus:ring-2 focus:ring-offset-2 bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-600 text-sm px-4 py-2 shadow-xs">
-                                    <i class="fas fa-chart-bar mr-2"></i>Charts
+                                <button id="chartsViewBtn" type="button" class="view-toggle inline-flex items-center justify-center rounded-md font-medium transition-colors focus:outline-hidden focus:ring-2 focus:ring-offset-2 bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-600 text-sm px-4 py-2 shadow-xs">
+                                    <i class="fas fa-chart-bar mr-2" aria-hidden="true"></i>Charts
                                 </button>
-                                <button id="sheetsViewBtn" class="view-toggle inline-flex items-center justify-center rounded-md font-medium transition-colors focus:outline-hidden focus:ring-2 focus:ring-offset-2 bg-transparent border border-gray-300 text-gray-700 hover:bg-gray-50 focus:ring-primary-600 text-sm px-4 py-2 shadow-xs">
-                                    <i class="fas fa-table mr-2"></i>Sheets
+                                <button id="sheetsViewBtn" type="button" class="view-toggle inline-flex items-center justify-center rounded-md font-medium transition-colors focus:outline-hidden focus:ring-2 focus:ring-offset-2 bg-transparent border border-gray-300 text-gray-700 hover:bg-gray-50 focus:ring-primary-600 text-sm px-4 py-2 shadow-xs">
+                                    <i class="fas fa-table mr-2" aria-hidden="true"></i>Sheets
                                 </button>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div id="contentContainer" class="w-full">
                         <div class="flex items-center justify-center h-64">
                             <div class="text-center">
-                                <i class="fas fa-spinner fa-spin text-3xl text-primary-600 mb-2"></i>
+                                <i class="fas fa-spinner fa-spin text-3xl text-primary-600 mb-2" aria-hidden="true"></i>
                                 <p class="text-gray-500">Loading dashboard...</p>
                             </div>
                         </div>
@@ -273,71 +218,71 @@
     </div>
 
     <!-- Mobile Filter Overlay -->
-    <div id="mobileFilterOverlay" class="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+    <div id="mobileFilterOverlay" class="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-50 hidden" role="dialog" aria-modal="true" aria-labelledby="mobileFilterTitle">
         <div class="absolute right-0 top-0 h-full w-80 bg-white p-6 overflow-y-auto">
             <div class="flex justify-between items-center mb-4">
-                <h2 class="text-lg font-semibold text-gray-800">Filters</h2>
-                <button id="closeMobileFilters" class="text-gray-500 hover:text-gray-700">
-                    <i class="fas fa-times text-xl"></i>
+                <h2 id="mobileFilterTitle" class="text-lg font-semibold text-gray-800">Filters</h2>
+                <button id="closeMobileFilters" type="button" aria-label="Close filters" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl" aria-hidden="true"></i>
                 </button>
             </div>
-            
+
             <div class="space-y-4">
                 <div class="mb-4">
-                    <label class="block text-sm font-medium text-[#162556] mb-2">Search Activities</label>
+                    <label class="block text-sm font-medium text-[#162556] mb-2" for="searchActivitiesMobile">Search Activities</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <i class="fas fa-search h-4 w-4 text-gray-400"></i>
+                            <i class="fas fa-search h-4 w-4 text-gray-400" aria-hidden="true"></i>
                         </div>
-                        <input type="text" class="filter-input block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-hidden focus:ring-primary-600 focus:border-primary-600 sm:text-sm" placeholder="Activity name, details...">
+                        <input id="searchActivitiesMobile" data-filter="search" type="text" class="filter-input block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-hidden focus:ring-primary-600 focus:border-primary-600 sm:text-sm" placeholder="Activity name, details...">
                     </div>
                 </div>
 
                 <div class="mb-4">
-                    <label class="block text-sm font-medium text-[#162556] mb-2">Component Program</label>
-                    <select class="filter-select w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-sm text-gray-700 hover:border-primary-600 focus:outline-hidden focus:ring-1 focus:ring-primary-600 focus:border-primary-600">
+                    <label class="block text-sm font-medium text-[#162556] mb-2" for="programFilterMobile">Component Program</label>
+                    <select id="programFilterMobile" data-filter="program" class="filter-select w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-sm text-gray-700 hover:border-primary-600 focus:outline-hidden focus:ring-1 focus:ring-primary-600 focus:border-primary-600">
                         <option value="">All Programs</option>
                     </select>
                 </div>
 
                 <div class="mb-4">
-                    <label class="block text-sm font-medium text-[#162556] mb-2">Industry Supported</label>
-                    <select class="filter-select w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-sm text-gray-700 hover:border-primary-600 focus:outline-hidden focus:ring-1 focus:ring-primary-600 focus:border-primary-600">
+                    <label class="block text-sm font-medium text-[#162556] mb-2" for="industryFilterMobile">Industry Supported</label>
+                    <select id="industryFilterMobile" data-filter="industry" class="filter-select w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-sm text-gray-700 hover:border-primary-600 focus:outline-hidden focus:ring-1 focus:ring-primary-600 focus:border-primary-600">
                         <option value="">All Industries</option>
                     </select>
                 </div>
 
                 <div class="mb-4">
-                    <label class="block text-sm font-medium text-[#162556] mb-2">Province</label>
-                    <select class="filter-select w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-sm text-gray-700 hover:border-primary-600 focus:outline-hidden focus:ring-1 focus:ring-primary-600 focus:border-primary-600">
+                    <label class="block text-sm font-medium text-[#162556] mb-2" for="provinceFilterMobile">Province</label>
+                    <select id="provinceFilterMobile" data-filter="province" class="filter-select w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-sm text-gray-700 hover:border-primary-600 focus:outline-hidden focus:ring-1 focus:ring-primary-600 focus:border-primary-600">
                         <option value="">All Provinces</option>
                     </select>
                 </div>
 
                 <div class="mb-4">
-                    <label class="block text-sm font-medium text-[#162556] mb-2">Modality</label>
-                    <select class="filter-select w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-sm text-gray-700 hover:border-primary-600 focus:outline-hidden focus:ring-1 focus:ring-primary-600 focus:border-primary-600">
+                    <label class="block text-sm font-medium text-[#162556] mb-2" for="modalityFilterMobile">Modality</label>
+                    <select id="modalityFilterMobile" data-filter="modality" class="filter-select w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-sm text-gray-700 hover:border-primary-600 focus:outline-hidden focus:ring-1 focus:ring-primary-600 focus:border-primary-600">
                         <option value="">All Modalities</option>
                     </select>
                 </div>
             </div>
 
-            <button class="clear-filters mt-6 w-full bg-gray-100 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-200 transition-colors font-medium border border-gray-300 text-sm focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-primary-600">
-                <i class="fas fa-times mr-2"></i>Clear All Filters
+            <button type="button" class="clear-filters mt-6 w-full bg-gray-100 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-200 transition-colors font-medium border border-gray-300 text-sm focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-primary-600">
+                <i class="fas fa-times mr-2" aria-hidden="true"></i>Clear All Filters
             </button>
         </div>
     </div>
 
     <!-- Mobile Menu Overlay -->
-    <div id="mobileMenuOverlay" class="lg:hidden hidden fixed inset-0 bg-black bg-opacity-50 z-50">
+    <div id="mobileMenuOverlay" class="lg:hidden hidden fixed inset-0 bg-black bg-opacity-50 z-50" role="dialog" aria-modal="true" aria-labelledby="mobileMenuTitle">
         <div class="absolute right-0 top-0 h-full w-64 bg-white p-6 overflow-y-auto">
             <div class="flex justify-between items-center mb-4">
-                <h2 class="text-lg font-semibold text-gray-800">Menu</h2>
-                <button id="closeMobileMenu" class="text-gray-500 hover:text-gray-700">
-                    <i class="fas fa-times text-xl"></i>
+                <h2 id="mobileMenuTitle" class="text-lg font-semibold text-gray-800">Menu</h2>
+                <button id="closeMobileMenu" type="button" aria-label="Close menu" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl" aria-hidden="true"></i>
                 </button>
             </div>
-            
+
             <div class="space-y-2">
                 <a href="#" class="block px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-primary-600 transition-colors">
                     About
@@ -358,16 +303,320 @@
                     Activities
                 </a>
                 <a href="#" class="block px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-primary-600 transition-colors">
-                    <i class="fas fa-search mr-2"></i>Search
+                    <i class="fas fa-search mr-2" aria-hidden="true"></i>Search
                 </a>
             </div>
         </div>
     </div>
 
+    <!-- Charts View Template -->
+    <template id="chartsViewTemplate">
+        <!-- Summary Cards -->
+        <div class="summary-cards mb-8">
+            <div class="summary-card bg-white rounded-lg shadow-xs p-4 hover:shadow-md transition-shadow duration-200">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-700 mb-1">Activities Found</p>
+                        <h3 class="text-2xl font-bold text-blue-600" id="activitiesCount">0</h3>
+                        <p class="text-xs text-gray-500 mt-1">
+                            <i class="fas fa-list-alt mr-1" aria-hidden="true"></i>
+                            Matching current filters
+                        </p>
+                    </div>
+                    <div class="bg-blue-50 p-3 rounded-full">
+                        <i class="fas fa-list-alt text-blue-600 text-lg" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="summary-card bg-white rounded-lg shadow-xs p-4 hover:shadow-md transition-shadow duration-200">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-700 mb-1">Total Budget</p>
+                        <h3 class="text-2xl font-bold text-green-600" id="filteredBudget">₱0</h3>
+                        <p class="text-xs text-gray-500 mt-1">
+                            <i class="fas fa-money-bill-wave mr-1" aria-hidden="true"></i>
+                            Allocation for filtered items
+                        </p>
+                    </div>
+                    <div class="bg-green-50 p-3 rounded-full">
+                        <i class="fas fa-money-bill-wave text-green-600 text-lg" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="summary-card bg-white rounded-lg shadow-xs p-4 hover:shadow-md transition-shadow duration-200">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-700 mb-1">Utilization Rate</p>
+                        <h3 class="text-2xl font-bold text-amber-600" id="filteredBUR">0%</h3>
+                        <p class="text-xs text-gray-500 mt-1">
+                            <i class="fas fa-chart-pie mr-1" aria-hidden="true"></i>
+                            <span id="filteredObligation">₱0 obligated</span>
+                        </p>
+                    </div>
+                    <div class="bg-amber-50 p-3 rounded-full">
+                        <i class="fas fa-chart-pie text-amber-600 text-lg" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="summary-card bg-white rounded-lg shadow-xs p-4 hover:shadow-md transition-shadow duration-200">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-700 mb-1">Programs</p>
+                        <h3 class="text-2xl font-bold text-purple-600" id="programsCount">0</h3>
+                        <p class="text-xs text-gray-500 mt-1">
+                            <i class="fas fa-project-diagram mr-1" aria-hidden="true"></i>
+                            Unique programs in view
+                        </p>
+                    </div>
+                    <div class="bg-purple-50 p-3 rounded-full">
+                        <i class="fas fa-project-diagram text-purple-600 text-lg" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="chart-grid-2x2">
+            <div class="chart-container bg-white p-4 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-200">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-chart-column w-5 h-5 text-blue-600 mr-2" aria-hidden="true"></i>
+                    <h3 class="text-lg font-semibold text-gray-800">Budget by Component Program</h3>
+                </div>
+                <div class="chart-content">
+                    <canvas id="programBudgetChart" role="img" aria-label="Bar chart of budget by component program">Your browser does not support the canvas element.</canvas>
+                </div>
+            </div>
+
+            <div class="chart-container bg-white p-4 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-200">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-chart-pie w-5 h-5 text-purple-600 mr-2" aria-hidden="true"></i>
+                    <h3 class="text-lg font-semibold text-gray-800">Activities by Province</h3>
+                </div>
+                <div class="chart-content">
+                    <canvas id="provincesPieChart" role="img" aria-label="Pie chart of activities by province">Your browser does not support the canvas element.</canvas>
+                </div>
+            </div>
+
+            <div class="chart-container bg-white p-4 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-200">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-industry w-5 h-5 text-green-600 mr-2" aria-hidden="true"></i>
+                    <h3 class="text-lg font-semibold text-gray-800">Industry Distribution</h3>
+                </div>
+                <div class="chart-content">
+                    <canvas id="industryChart" role="img" aria-label="Pie chart of activities by industry">Your browser does not support the canvas element.</canvas>
+                </div>
+            </div>
+
+            <div class="chart-container bg-white p-4 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-200">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-bars-progress w-5 h-5 text-orange-600 mr-2" aria-hidden="true"></i>
+                    <h3 class="text-lg font-semibold text-gray-800">Activities by Program</h3>
+                </div>
+                <div class="chart-content">
+                    <canvas id="modalityChart" role="img" aria-label="Bar chart of activities by program">Your browser does not support the canvas element.</canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call-to-action for detailed view -->
+        <div class="bg-white rounded-lg border border-gray-200 shadow-xs p-4 mt-8">
+            <div class="flex justify-between items-center mb-2">
+                <h2 class="text-lg font-semibold text-gray-800">Need Detailed Results?</h2>
+                <button id="switchToSheets" type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-primary-600">
+                    <i class="fas fa-table w-4 h-4 mr-1" aria-hidden="true"></i>
+                    View Table
+                </button>
+            </div>
+            <p class="text-gray-800 text-sm">Switch to the Sheets view for detailed search results, sortable columns, and advanced filtering options.</p>
+        </div>
+    </template>
+
+    <!-- Sheets View Template -->
+    <template id="sheetsViewTemplate">
+        <!-- Summary Cards -->
+        <div class="summary-cards mb-8">
+            <div class="summary-card bg-white rounded-lg shadow-xs p-4 hover:shadow-md transition-shadow duration-200">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-700 mb-1">Activities Found</p>
+                        <h3 class="text-2xl font-bold text-blue-600" id="activitiesCount">0</h3>
+                        <p class="text-xs text-gray-500 mt-1">
+                            <i class="fas fa-list-alt mr-1" aria-hidden="true"></i>
+                            Matching current filters
+                        </p>
+                    </div>
+                    <div class="bg-blue-50 p-3 rounded-full">
+                        <i class="fas fa-list-alt text-blue-600 text-lg" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="summary-card bg-white rounded-lg shadow-xs p-4 hover:shadow-md transition-shadow duration-200">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-700 mb-1">Total Budget</p>
+                        <h3 class="text-2xl font-bold text-green-600" id="filteredBudget">₱0</h3>
+                        <p class="text-xs text-gray-500 mt-1">
+                            <i class="fas fa-money-bill-wave mr-1" aria-hidden="true"></i>
+                            Allocation for filtered items
+                        </p>
+                    </div>
+                    <div class="bg-green-50 p-3 rounded-full">
+                        <i class="fas fa-money-bill-wave text-green-600 text-lg" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="summary-card bg-white rounded-lg shadow-xs p-4 hover:shadow-md transition-shadow duration-200">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-700 mb-1">Utilization Rate</p>
+                        <h3 class="text-2xl font-bold text-amber-600" id="filteredBUR">0%</h3>
+                        <p class="text-xs text-gray-500 mt-1">
+                            <i class="fas fa-chart-pie mr-1" aria-hidden="true"></i>
+                            <span id="filteredObligation">₱0 obligated</span>
+                        </p>
+                    </div>
+                    <div class="bg-amber-50 p-3 rounded-full">
+                        <i class="fas fa-chart-pie text-amber-600 text-lg" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="summary-card bg-white rounded-lg shadow-xs p-4 hover:shadow-md transition-shadow duration-200">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-700 mb-1">Programs</p>
+                        <h3 class="text-2xl font-bold text-purple-600" id="programsCount">0</h3>
+                        <p class="text-xs text-gray-500 mt-1">
+                            <i class="fas fa-project-diagram mr-1" aria-hidden="true"></i>
+                            Unique programs in view
+                        </p>
+                    </div>
+                    <div class="bg-purple-50 p-3 rounded-full">
+                        <i class="fas fa-project-diagram text-purple-600 text-lg" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Source Toggle Buttons -->
+        <div class="border-b border-gray-200 mb-6 overflow-x-auto">
+            <div class="flex min-w-max">
+                <button id="activitiesViewBtn" type="button" class="data-source-btn px-3 sm:px-4 py-2 border-b-2 font-medium flex items-center whitespace-nowrap border-blue-500 text-blue-600">
+                    <i class="fas fa-list-alt w-4 h-4 mr-1.5 sm:mr-2" aria-hidden="true"></i>
+                    Activities
+                </button>
+                <button id="perUacsViewBtn" type="button" class="data-source-btn px-3 sm:px-4 py-2 border-b-2 font-medium flex items-center whitespace-nowrap text-gray-800 hover:text-blue-600 border-transparent">
+                    <i class="fas fa-file-invoice-dollar w-4 h-4 mr-1.5 sm:mr-2" aria-hidden="true"></i>
+                    Per UACS
+                </button>
+                <button id="fundsViewBtn" type="button" class="data-source-btn px-3 sm:px-4 py-2 border-b-2 font-medium flex items-center whitespace-nowrap text-gray-800 hover:text-blue-600 border-transparent">
+                    <i class="fas fa-money-bill-wave w-4 h-4 mr-1.5 sm:mr-2" aria-hidden="true"></i>
+                    Funds
+                </button>
+            </div>
+        </div>
+
+        <!-- Activities Table -->
+        <div id="activitiesTableContainer" class="sheets-container">
+            <div class="overflow-x-auto bg-white rounded-lg border border-gray-200 shadow-sm">
+                <table class="min-w-full table-fixed divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Activity / Event</th>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Component Program</th>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Industry</th>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Province</th>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Modality</th>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Start Date</th>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">End Date</th>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Remarks/Details</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200" id="activitiesTableBody">
+                        <!-- Data will be populated dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Per UACS Table -->
+        <div id="perUacsTableContainer" class="sheets-container hidden">
+            <div class="overflow-x-auto bg-white rounded-lg border border-gray-200 shadow-sm">
+                <table class="min-w-full table-fixed divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Component Program</th>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Fund Source</th>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Specific Activity</th>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Sub-ARO No.</th>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Total Allocation</th>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Obligation</th>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">BUR</th>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Unobligated Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200" id="perUacsTableBody">
+                        <!-- Data will be populated dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Funds Table -->
+        <div id="fundsTableContainer" class="sheets-container hidden">
+            <div class="overflow-x-auto bg-white rounded-lg border border-gray-200 shadow-sm">
+                <table class="min-w-full table-fixed divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Component Program</th>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Fund Source</th>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Specific Activity</th>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Sub-ARO No.</th>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Total Allocation</th>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Obligation</th>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">BUR</th>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-[#162556] uppercase tracking-wider">Unobligated Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200" id="fundsTableBody">
+                        <!-- Data will be populated dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="mt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="text-sm text-gray-500" id="paginationInfo">
+                Showing <span class="font-medium text-gray-700">0</span> of <span class="font-medium text-gray-700">0</span> activities
+            </div>
+            <div class="flex items-center space-x-2">
+                <button id="prevPage" type="button" class="inline-flex items-center justify-center px-3 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 rounded-md hover:bg-gray-50 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-primary-600 disabled:opacity-50 disabled:cursor-not-allowed shadow-xs" disabled>
+                    <i class="fas fa-chevron-left mr-1" aria-hidden="true"></i>
+                    Previous
+                </button>
+                <div class="flex items-center space-x-1">
+                    <span class="text-sm text-gray-700">Page</span>
+                    <input type="number" id="pageInput" aria-label="Page number" class="w-12 text-center border border-gray-300 rounded-md px-2 py-1 text-sm focus:ring-2 focus:ring-primary-600 focus:border-primary-600" min="1" value="1">
+                    <span class="text-sm text-gray-700">of <span id="totalPages">1</span></span>
+                </div>
+                <button id="nextPage" type="button" class="inline-flex items-center justify-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-primary-700 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-primary-600 disabled:opacity-50 disabled:cursor-not-allowed shadow-xs" disabled>
+                    Next
+                    <i class="fas fa-chevron-right ml-1" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </template>
+
     <!-- Scripts -->
-    <script src="chart-renderer.js"></script>
-    <script src="sheets-integration.js"></script>
-    <script src="connect.js"></script>
-    <script src="scripts.js"></script>
+    <script src="connect.js" defer></script>
+    <script src="sheets-integration.js" defer></script>
+    <script src="chart-renderer.js" defer></script>
+    <script src="scripts.js" defer></script>
 </body>
 </html>

@@ -39,6 +39,12 @@ class ChartRenderer {
         }
     }
 
+    destroy() {
+        window.removeEventListener('resize', this.handleResize);
+        this.destroyAllCharts();
+        this.lastChartData = null;
+    }
+
     formatMillions(value) {
         if (value >= 1000000) {
             return `₱${(value / 1000000).toFixed(3)}M`;
@@ -120,10 +126,10 @@ class ChartRenderer {
                 maintainAspectRatio: false,
                 layout: {
                     padding: {
-                        top: 30,
-                        right: 20,
+                        top: 48,
+                        right: 24,
                         bottom: 80,
-                        left: 20
+                        left: 24
                     }
                 },
                 animation: {
@@ -156,7 +162,7 @@ class ChartRenderer {
                         },
                         anchor: 'end',
                         align: 'top',
-                        offset: 2,
+                        offset: 4,
                         formatter: (value) => {
                             return this.formatMillions(value);
                         },
@@ -291,7 +297,7 @@ class ChartRenderer {
                 layout: {
                     padding: {
                         top: 15,
-                        right: 25,
+                        right: 48,
                         bottom: 15,
                         left: 15
                     }
@@ -323,7 +329,7 @@ class ChartRenderer {
                         },
                         anchor: 'end',
                         align: 'right',
-                        offset: 2,
+                        offset: 4,
                         formatter: (value) => {
                             return value;
                         },
@@ -391,7 +397,8 @@ class ChartRenderer {
 
         const provinces = Object.keys(provinceData);
         const counts = Object.values(provinceData);
-
+        const containerWidth = ctx.parentElement ? ctx.parentElement.clientWidth : window.innerWidth;
+        const compact = containerWidth < 500;
 
         if (this.charts.provinces) {
             this.charts.provinces.destroy();
@@ -418,10 +425,10 @@ class ChartRenderer {
                 maintainAspectRatio: false,
                 layout: {
                     padding: {
-                        top: 40,
-                        right: 40,
-                        bottom: 40,
-                        left: 40
+                        top: compact ? 16 : 40,
+                        right: compact ? 16 : 40,
+                        bottom: compact ? 16 : 40,
+                        left: compact ? 16 : 40
                     }
                 },
                 animation: {
@@ -429,16 +436,16 @@ class ChartRenderer {
                     easing: this.easing
                 },
                 plugins: {
-                    legend: { 
-                        position: 'right',
+                    legend: {
+                        position: compact ? 'bottom' : 'right',
                         labels: {
                             boxWidth: 12,
                             font: {
-                                size: 11
+                                size: compact ? 9 : 11
                             },
                             usePointStyle: true,
                             pointStyle: 'circle',
-                            padding: 15
+                            padding: compact ? 8 : 15
                         }
                     },
                     tooltip: {
@@ -447,21 +454,23 @@ class ChartRenderer {
                     },
                     datalabels: {
                         display: (context) => {
-                            const value = context.dataset.data[context.dataIndex];
-                            const total = counts.reduce((a, b) => a + b, 0);
-                            const percentage = (value / total) * 100;
-                            return percentage > 3;
+                            const data = context.dataset.data || [];
+                            const value = data[context.dataIndex] || 0;
+                            const total = data.reduce((a, b) => a + b, 0);
+                            const threshold = context.chart.width < 500 ? 5 : 3;
+                            return total > 0 && (value / total) * 100 > threshold;
                         },
                         color: (context) => {
                             return context.dataset.backgroundColor[context.dataIndex];
                         },
                         font: {
                             weight: 'bold',
-                            size: 10,
+                            size: compact ? 9 : 10,
                         },
                         formatter: (value, context) => {
-                            const total = counts.reduce((a, b) => a + b, 0);
-                            const percentage = ((value / total) * 100).toFixed(1);
+                            const data = context.chart.data.datasets[0].data || [];
+                            const total = data.reduce((a, b) => a + b, 0);
+                            const percentage = total > 0 ? ((value / total) * 100).toFixed(1) : '0.0';
                             return `${value}\n(${percentage}%)`;
                         },
                         textAlign: 'center',
@@ -477,9 +486,9 @@ class ChartRenderer {
                             left: 5,
                             right: 5
                         },
-                        align: 'end',
-                        anchor: 'end',
-                        offset: 8,
+                        align: compact ? 'center' : 'end',
+                        anchor: compact ? 'center' : 'end',
+                        offset: compact ? 0 : 8,
                         clip: false
                     }
                 }
@@ -493,6 +502,12 @@ class ChartRenderer {
 
         const industries = Object.keys(industryData);
         const counts = Object.values(industryData);
+        const containerWidth = ctx.parentElement ? ctx.parentElement.clientWidth : window.innerWidth;
+        const compact = containerWidth < 500;
+
+        if (this.charts.industry) {
+            this.charts.industry.destroy();
+        }
 
         this.charts.industry = new Chart(ctx, {
             type: 'pie',
@@ -515,10 +530,10 @@ class ChartRenderer {
                 maintainAspectRatio: false,
                 layout: {
                     padding: {
-                        top: 40,
-                        right: 40,
-                        bottom: 40,
-                        left: 40
+                        top: compact ? 16 : 40,
+                        right: compact ? 16 : 40,
+                        bottom: compact ? 16 : 40,
+                        left: compact ? 16 : 40
                     }
                 },
                 animation: {
@@ -526,16 +541,16 @@ class ChartRenderer {
                     easing: this.easing
                 },
                 plugins: {
-                    legend: { 
-                        position: 'right',
+                    legend: {
+                        position: compact ? 'bottom' : 'right',
                         labels: {
                             boxWidth: 12,
                             font: {
-                                size: 11
+                                size: compact ? 9 : 11
                             },
                             usePointStyle: true,
                             pointStyle: 'circle',
-                            padding: 15
+                            padding: compact ? 8 : 15
                         }
                     },
                     tooltip: {
@@ -544,21 +559,23 @@ class ChartRenderer {
                     },
                     datalabels: {
                         display: (context) => {
-                            const value = context.dataset.data[context.dataIndex];
-                            const total = counts.reduce((a, b) => a + b, 0);
-                            const percentage = (value / total) * 100;
-                            return percentage > 3;
+                            const data = context.dataset.data || [];
+                            const value = data[context.dataIndex] || 0;
+                            const total = data.reduce((a, b) => a + b, 0);
+                            const threshold = context.chart.width < 500 ? 5 : 3;
+                            return total > 0 && (value / total) * 100 > threshold;
                         },
                         color: (context) => {
                             return context.dataset.backgroundColor[context.dataIndex];
                         },
                         font: {
                             weight: 'bold',
-                            size: 10,
+                            size: compact ? 9 : 10,
                         },
                         formatter: (value, context) => {
-                            const total = counts.reduce((a, b) => a + b, 0);
-                            const percentage = ((value / total) * 100).toFixed(1);
+                            const data = context.chart.data.datasets[0].data || [];
+                            const total = data.reduce((a, b) => a + b, 0);
+                            const percentage = total > 0 ? ((value / total) * 100).toFixed(1) : '0.0';
                             return `${value}\n(${percentage}%)`;
                         },
                         textAlign: 'center',
@@ -574,9 +591,9 @@ class ChartRenderer {
                             left: 5,
                             right: 5
                         },
-                        align: 'end',
-                        anchor: 'end',
-                        offset: 8,
+                        align: compact ? 'center' : 'end',
+                        anchor: compact ? 'center' : 'end',
+                        offset: compact ? 0 : 8,
                         clip: false
                     }
                 }
@@ -600,14 +617,11 @@ class ChartRenderer {
 
         this.lastChartData = chartData;
         this.destroyAllCharts();
-        
-        setTimeout(() => {
-            this.renderAllocationChart(chartData.programBreakdown);
-            this.renderProgramChart(chartData.programBreakdown);
-            this.renderProvinceChart(chartData.provinceBreakdown);
-            this.renderIndustryChart(chartData.industryBreakdown);
-            
-        }, 100);
+
+        this.renderAllocationChart(chartData.programBreakdown);
+        this.renderProgramChart(chartData.programBreakdown);
+        this.renderProvinceChart(chartData.provinceBreakdown);
+        this.renderIndustryChart(chartData.industryBreakdown);
     }
 
     updateCharts(chartData) {
@@ -615,6 +629,7 @@ class ChartRenderer {
             console.error('No chart data provided for update');
             return;
         }
+        this.lastChartData = chartData;
         this.updateAllocationChartWithTransition(chartData.programBreakdown);
         this.updateProgramChartWithTransition(chartData.programBreakdown);
         this.updateProvinceChartWithTransition(chartData.provinceBreakdown);
@@ -718,6 +733,25 @@ class ChartRenderer {
         this.charts.program.update();
     }
 
+    applyPieResponsiveOptions(chart) {
+        if (!chart) return;
+
+        const compact = chart.width < 500;
+        const options = chart.options;
+
+        options.plugins.legend.position = compact ? 'bottom' : 'right';
+        options.plugins.legend.labels.padding = compact ? 8 : 15;
+        options.plugins.legend.labels.font.size = compact ? 9 : 11;
+        options.layout.padding = compact
+            ? { top: 16, right: 16, bottom: 16, left: 16 }
+            : { top: 40, right: 40, bottom: 40, left: 40 };
+
+        options.plugins.datalabels.align = compact ? 'center' : 'end';
+        options.plugins.datalabels.anchor = compact ? 'center' : 'end';
+        options.plugins.datalabels.offset = compact ? 0 : 8;
+        options.plugins.datalabels.font.size = compact ? 9 : 10;
+    }
+
     updateProvinceChartWithTransition(provinceData) {
         if (!this.charts.provinces || !provinceData) return;
         const provinces = Object.keys(provinceData);
@@ -725,6 +759,7 @@ class ChartRenderer {
         this.charts.provinces.data.labels = provinces;
         this.charts.provinces.data.datasets[0].data = counts;
         this.charts.provinces.data.datasets[0].backgroundColor = this.getPieColors(provinces.length);
+        this.applyPieResponsiveOptions(this.charts.provinces);
         this.charts.provinces.update();
     }
 
@@ -735,6 +770,7 @@ class ChartRenderer {
         this.charts.industry.data.labels = industries;
         this.charts.industry.data.datasets[0].data = counts;
         this.charts.industry.data.datasets[0].backgroundColor = this.getPieColors(industries.length);
+        this.applyPieResponsiveOptions(this.charts.industry);
         this.charts.industry.update();
     }
 
